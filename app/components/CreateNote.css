@@ -1,0 +1,8 @@
+.create-note-form {
+    display: flex;
+    background-color: teal;
+    flex-direction: column;
+    padding: 40px;
+    justify-content: space-between;
+    height: 50vh;
+}
