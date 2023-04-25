@@ -10,6 +10,7 @@ import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import { type Dialect, Sequelize } from "sequelize";
 
 const ABORT_DELAY = 5_000;
 
@@ -21,17 +22,17 @@ export default function handleRequest(
 ) {
   return isbot(request.headers.get("user-agent"))
     ? handleBotRequest(
-        request,
-        responseStatusCode,
-        responseHeaders,
-        remixContext
-      )
+      request,
+      responseStatusCode,
+      responseHeaders,
+      remixContext
+    )
     : handleBrowserRequest(
-        request,
-        responseStatusCode,
-        responseHeaders,
-        remixContext
-      );
+      request,
+      responseStatusCode,
+      responseHeaders,
+      remixContext
+    );
 }
 
 function handleBotRequest(
@@ -117,3 +118,24 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
+
+export const sequelize = new Sequelize(
+  process.env.DB_NAME || "database",
+  process.env.DB_USERNAME || "username",
+  process.env.DB_PASSWORD || "password",
+  {
+    host: process.env.DB_HOST || 'localhost',
+    dialect: (process.env.DB_DIALECT || 'postgres') as Dialect
+  }
+)
+
+async function connectWithDatabase() {
+  try {
+    await sequelize.authenticate()    
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+
+connectWithDatabase()

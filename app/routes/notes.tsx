@@ -1,5 +1,6 @@
-import type { ActionFunction, LinksFunction } from '@remix-run/node'
+import { type ActionFunction, type LinksFunction, redirect } from '@remix-run/node'
 import CreateNote, { links as createNoteLinks } from '~/components/CreateNote'
+import Note from '~/models/Note'
 
 function Notes() {
   return (
@@ -28,9 +29,11 @@ export const action: ActionFunction = async ({ request }) => {
         // }
         const noteData = Object.fromEntries(formData)
 
+        const note = await Note.create(noteData)
+        
         console.log({ noteData });
         
-        return "ok"
+        return redirect("/notes")
     } catch (error) {
         console.log({ error });
     }
