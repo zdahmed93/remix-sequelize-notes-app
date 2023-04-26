@@ -1,4 +1,5 @@
 import { LinksFunction } from "@remix-run/node"
+import { Link } from "@remix-run/react"
 import { type FunctionComponent } from "react"
 import styles from './ListNotes.css'
 
@@ -17,10 +18,12 @@ const ListNotes:FunctionComponent<ListNotesProps> = ({notes}) => {
     <div className="notes-container">
         {
             notes.map(note => (
-                <div key={note.id} className="note">
-                    <h1>{note.title}</h1>
-                    <p>{note.content}</p>
-                </div>
+                <Link key={note.id} to={`/note/${note.id}`}>
+                    <div className="note">
+                        <h1>{note.title}</h1>
+                        <p>{note.content}</p>
+                    </div>
+                </Link>
             ))
         }
     </div>

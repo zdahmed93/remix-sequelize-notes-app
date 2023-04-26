@@ -3,7 +3,8 @@ import { sequelize } from '../entry.server'
 
 const Note = sequelize.define('Note', {
     title: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        // primaryKey: true
     },
     content: {
         type: DataTypes.STRING
