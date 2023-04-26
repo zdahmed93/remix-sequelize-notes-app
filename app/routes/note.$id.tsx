@@ -22,3 +22,20 @@ export const loader: LoaderFunction = async ({ params }) => {
 }
 
 export default SingleNote
+
+export const meta = ({data}) => { // data is the data returned from the loader function
+  const note = data
+  console.log('NTE',{note});
+  
+  return [
+      { title: note.title },
+      {
+        property: "og:title",
+        content: "Very cool app",
+      },
+      {
+        name: "description",
+        content: "This app is the best",
+      },
+    ];
+}

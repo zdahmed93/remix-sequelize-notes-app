@@ -1,4 +1,4 @@
-import { type ActionFunction, type LinksFunction, redirect, LoaderFunction } from '@remix-run/node'
+import { type ActionFunction, type LinksFunction, redirect, LoaderFunction, MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import CreateNote, { links as createNoteLinks } from '~/components/CreateNote'
 import ListNotes, { links as listNotesLinks } from '~/components/ListNotes'
@@ -56,4 +56,25 @@ export const loader: LoaderFunction = async () => {
         console.log(error);
         
     }
+}
+
+// export const meta: MetaFunction = () => {
+//     return {
+//         title: 'All notes'
+//     }
+// }
+
+// V2
+export const meta = () => {
+    return [
+        { title: "All the notes" },
+        {
+          property: "og:title",
+          content: "Very cool app",
+        },
+        {
+          name: "description",
+          content: "This app is the best",
+        },
+      ];
 }
