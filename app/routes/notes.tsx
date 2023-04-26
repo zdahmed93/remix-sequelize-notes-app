@@ -38,7 +38,7 @@ export const action: ActionFunction = async ({ request }) => {
         const note = await Note.create(noteData)
         
         console.log({ noteData });
-        
+        await new Promise((resolve, reject) => setTimeout(() => {resolve('')}, 2000))
         return redirect("/notes")
     } catch (error) {
         console.log({ error });
