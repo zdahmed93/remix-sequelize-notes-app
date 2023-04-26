@@ -1,11 +1,16 @@
-import { type ActionFunction, type LinksFunction, redirect } from '@remix-run/node'
+import { type ActionFunction, type LinksFunction, redirect, LoaderFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import CreateNote, { links as createNoteLinks } from '~/components/CreateNote'
+import ListNotes, { links as listNotesLinks } from '~/components/ListNotes'
 import Note from '~/models/Note'
 
 function Notes() {
+    const notes = useLoaderData()
+    
   return (
     <div>
         <CreateNote />
+        <ListNotes notes={notes} />
     </div>
   )
 }
@@ -13,8 +18,7 @@ function Notes() {
 export default Notes
 
 export const links: LinksFunction = () => {
-    console.log(createNoteLinks());
-    return [...createNoteLinks()]
+    return [...createNoteLinks(), ...listNotesLinks()]
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -23,6 +27,8 @@ export const action: ActionFunction = async ({ request }) => {
         const title = formData.get('title')
         const content = formData.get('content')
         
+        // TODO: Add validation
+
         // const noteData = {
         //     title,
         //     content
@@ -36,5 +42,15 @@ export const action: ActionFunction = async ({ request }) => {
         return redirect("/notes")
     } catch (error) {
         console.log({ error });
+    }
+}
+
+export const loader: LoaderFunction = async () => {
+    try {
+        const notes = await Note.findAll() 
+        return notes.map(n => n.toJSON())
+    } catch (error) {
+        console.log(error);
+        
     }
 }

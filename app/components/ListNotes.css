@@ -1,0 +1,15 @@
+.notes-container {
+    background-color: pink;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.note {
+    background-color: white;
+    border-radius: 8px;
+    border: solid 1px black;
+    min-width: 600px;
+    margin: 10px;
+}

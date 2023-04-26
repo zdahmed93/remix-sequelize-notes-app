@@ -6,7 +6,7 @@ function CreateNote() {
     <div>
         <form method='post' className='create-note-form'>
             <input type="text" name='title' placeholder='Title ...' />
-            <textarea name="content" cols={30} rows={10}></textarea>
+            <textarea name="content" cols={30} rows={10} placeholder='Content ...'></textarea>
             <button type='submit'>Add</button>
         </form>
     </div>
