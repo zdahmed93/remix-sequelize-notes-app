@@ -4,3 +4,12 @@
     justify-content: space-evenly;
     margin-bottom: 10px;
 }
+
+.navbar a {
+    text-decoration: none;
+}
+
+.navbar .active {
+    font-weight: bold;
+    border: 1px solid black;
+}
