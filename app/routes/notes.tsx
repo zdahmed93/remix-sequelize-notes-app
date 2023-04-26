@@ -27,13 +27,16 @@ export const action: ActionFunction = async ({ request }) => {
         const title = formData.get('title')
         const content = formData.get('content')
         
-        // TODO: Add validation
+        // Validation
+        if ((title as string).trim().length < 5) {
+            return { error: 'Title should be greater or equal to 5 chars' }
+        }
 
-        // const noteData = {
-        //     title,
-        //     content
-        // }
-        const noteData = Object.fromEntries(formData)
+        const noteData = {
+            title,
+            content
+        }
+        // const noteData = Object.fromEntries(formData)
 
         const note = await Note.create(noteData)
         
