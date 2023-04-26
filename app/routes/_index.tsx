@@ -1,6 +1,5 @@
 import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
 import { NavLink } from "@remix-run/react";
-import styles from '~/styles/home.css'
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "New Remix App" }];
@@ -9,10 +8,6 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <>
-    <div className="navbar">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/notes">Notes</NavLink>
-    </div>
       <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
         <h1>Welcome to Remix</h1>
         <ul>
@@ -44,5 +39,3 @@ export default function Index() {
     </>
   );
 }
-
-export const links: LinksFunction = () => [{rel: "stylesheet", href: styles}]

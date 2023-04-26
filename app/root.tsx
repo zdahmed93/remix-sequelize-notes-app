@@ -6,6 +6,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import Navbar from "./components/Navbar";
+import globalStyles from '~/styles/global.css'
+import { LinksFunction } from "@remix-run/node";
 
 export default function App() {
   return (
@@ -17,6 +20,9 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <header>
+          <Navbar />
+        </header>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -25,3 +31,5 @@ export default function App() {
     </html>
   );
 }
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: globalStyles }]
